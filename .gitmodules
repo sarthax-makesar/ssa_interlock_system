@@ -1,0 +1,3 @@
+[submodule "rtl/ohwr"]
+	path = rtl/ohwr
+	url = https://gitlab.com/ohwr/project/general-cores.git
