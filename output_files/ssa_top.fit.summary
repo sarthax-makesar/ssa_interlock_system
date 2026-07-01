@@ -1,0 +1,20 @@
+Fitter Status : Successful - Tue Jun 30 21:47:17 2026
+Quartus Prime Version : 22.1std.2 Build 922 07/20/2023 SC Lite Edition
+Revision Name : ssa_top
+Top-level Entity Name : ssa_top
+Family : Cyclone IV GX
+Device : EP4CGX75DF27C8
+Timing Models : Final
+Total logic elements : 625 / 73,920 ( < 1 % )
+    Total combinational functions : 611 / 73,920 ( < 1 % )
+    Dedicated logic registers : 64 / 73,920 ( < 1 % )
+Total registers : 64
+Total pins : 279 / 343 ( 81 % )
+Total virtual pins : 0
+Total memory bits : 0 / 4,257,792 ( 0 % )
+Embedded Multiplier 9-bit elements : 0 / 396 ( 0 % )
+Total GXB Receiver Channel PCS : 0 / 8 ( 0 % )
+Total GXB Receiver Channel PMA : 0 / 8 ( 0 % )
+Total GXB Transmitter Channel PCS : 0 / 8 ( 0 % )
+Total GXB Transmitter Channel PMA : 0 / 8 ( 0 % )
+Total PLLs : 0 / 8 ( 0 % )

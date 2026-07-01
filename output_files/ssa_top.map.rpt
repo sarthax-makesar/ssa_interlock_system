@@ -1,0 +1,712 @@
+Analysis & Synthesis report for ssa_top
+Tue Jun 30 21:47:03 2026
+Quartus Prime Version 22.1std.2 Build 922 07/20/2023 SC Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. General Register Statistics
+  9. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 10. Parameter Settings for User Entity Instance: lost_drive_watchdog:u_lost_drive_watchdog|gc_fsm_watchdog:U_CORE_TIMER
+ 11. Parameter Settings for User Entity Instance: gc_sync_ffs:u_sync_fast
+ 12. Parameter Settings for User Entity Instance: gc_sync_ffs:u_sync_fast|gc_sync:cmp_gc_sync
+ 13. Parameter Settings for User Entity Instance: gc_sync_ffs:u_sync_fast|gc_edge_detect:cmp_gc_posedge
+ 14. Parameter Settings for User Entity Instance: gc_sync_ffs:u_sync_fast|gc_edge_detect:cmp_gc_negedge
+ 15. Parameter Settings for User Entity Instance: gc_sync_ffs:u_sync_slow
+ 16. Parameter Settings for User Entity Instance: gc_sync_ffs:u_sync_slow|gc_sync:cmp_gc_sync
+ 17. Parameter Settings for User Entity Instance: gc_sync_ffs:u_sync_slow|gc_edge_detect:cmp_gc_posedge
+ 18. Parameter Settings for User Entity Instance: gc_sync_ffs:u_sync_slow|gc_edge_detect:cmp_gc_negedge
+ 19. Parameter Settings for User Entity Instance: gc_sync_ffs:u_sync_overdrive
+ 20. Parameter Settings for User Entity Instance: gc_sync_ffs:u_sync_overdrive|gc_sync:cmp_gc_sync
+ 21. Parameter Settings for User Entity Instance: gc_sync_ffs:u_sync_overdrive|gc_edge_detect:cmp_gc_posedge
+ 22. Parameter Settings for User Entity Instance: gc_sync_ffs:u_sync_overdrive|gc_edge_detect:cmp_gc_negedge
+ 23. Parameter Settings for User Entity Instance: gc_sync_ffs:u_sync_unbalance
+ 24. Parameter Settings for User Entity Instance: gc_sync_ffs:u_sync_unbalance|gc_sync:cmp_gc_sync
+ 25. Parameter Settings for User Entity Instance: gc_sync_ffs:u_sync_unbalance|gc_edge_detect:cmp_gc_posedge
+ 26. Parameter Settings for User Entity Instance: gc_sync_ffs:u_sync_unbalance|gc_edge_detect:cmp_gc_negedge
+ 27. Port Connectivity Checks: "gc_sync_ffs:u_sync_unbalance"
+ 28. Port Connectivity Checks: "gc_sync_ffs:u_sync_overdrive"
+ 29. Port Connectivity Checks: "gc_sync_ffs:u_sync_slow"
+ 30. Port Connectivity Checks: "gc_sync_ffs:u_sync_fast"
+ 31. Port Connectivity Checks: "module_health_monitor:u_health_mon"
+ 32. Port Connectivity Checks: "lost_drive_watchdog:u_lost_drive_watchdog"
+ 33. Port Connectivity Checks: "overdrive_protect_unit:u_overdrive_comp"
+ 34. Port Connectivity Checks: "slow_comparator_core:u_slow_comp"
+ 35. Port Connectivity Checks: "fast_comparator_core:u_fast_comp"
+ 36. Post-Synthesis Netlist Statistics for Top Partition
+ 37. Elapsed Time Per Partition
+ 38. Analysis & Synthesis Messages
+ 39. Analysis & Synthesis Suppressed Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2023  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details, at
+https://fpgasoftware.intel.com/eula.
+
+
+
++-------------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                        ;
++------------------------------------+------------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Tue Jun 30 21:47:03 2026          ;
+; Quartus Prime Version              ; 22.1std.2 Build 922 07/20/2023 SC Lite Edition ;
+; Revision Name                      ; ssa_top                                        ;
+; Top-level Entity Name              ; ssa_top                                        ;
+; Family                             ; Cyclone IV GX                                  ;
+; Total logic elements               ; 623                                            ;
+;     Total combinational functions  ; 611                                            ;
+;     Dedicated logic registers      ; 64                                             ;
+; Total registers                    ; 64                                             ;
+; Total pins                         ; 279                                            ;
+; Total virtual pins                 ; 0                                              ;
+; Total memory bits                  ; 0                                              ;
+; Embedded Multiplier 9-bit elements ; 0                                              ;
+; Total GXB Receiver Channel PCS     ; 0                                              ;
+; Total GXB Receiver Channel PMA     ; 0                                              ;
+; Total GXB Transmitter Channel PCS  ; 0                                              ;
+; Total GXB Transmitter Channel PMA  ; 0                                              ;
+; Total PLLs                         ; 0                                              ;
++------------------------------------+------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                              ;
++------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                           ; Setting            ; Default Value      ;
++------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                           ; EP4CGX75DF27C8     ;                    ;
+; Top-level entity name                                            ; ssa_top            ; ssa_top            ;
+; Family name                                                      ; Cyclone IV GX      ; Cyclone V          ;
+; VHDL Show LMF Mapping Messages                                   ; Off                ;                    ;
+; VHDL Version                                                     ; VHDL_2008          ; VHDL_1993          ;
+; Use smart compilation                                            ; Off                ; Off                ;
+; Enable parallel Assembler and Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                      ; Off                ; Off                ;
+; Restructure Multiplexers                                         ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                              ; Off                ; Off                ;
+; Preserve fewer node names                                        ; On                 ; On                 ;
+; Intel FPGA IP Evaluation Mode                                    ; Enable             ; Enable             ;
+; Verilog Version                                                  ; Verilog_2001       ; Verilog_2001       ;
+; State Machine Processing                                         ; Auto               ; Auto               ;
+; Safe State Machine                                               ; Off                ; Off                ;
+; Extract Verilog State Machines                                   ; On                 ; On                 ;
+; Extract VHDL State Machines                                      ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                       ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                   ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                          ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                        ; On                 ; On                 ;
+; Parallel Synthesis                                               ; On                 ; On                 ;
+; DSP Block Balancing                                              ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                               ; On                 ; On                 ;
+; Power-Up Don't Care                                              ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                     ; Off                ; Off                ;
+; Remove Duplicate Registers                                       ; On                 ; On                 ;
+; Ignore CARRY Buffers                                             ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                           ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                            ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                        ; Off                ; Off                ;
+; Ignore LCELL Buffers                                             ; Off                ; Off                ;
+; Ignore SOFT Buffers                                              ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                   ; Off                ; Off                ;
+; Optimization Technique                                           ; Balanced           ; Balanced           ;
+; Carry Chain Length                                               ; 70                 ; 70                 ;
+; Auto Carry Chains                                                ; On                 ; On                 ;
+; Auto Open-Drain Pins                                             ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                            ; Off                ; Off                ;
+; Auto ROM Replacement                                             ; On                 ; On                 ;
+; Auto RAM Replacement                                             ; On                 ; On                 ;
+; Auto DSP Block Replacement                                       ; On                 ; On                 ;
+; Auto Shift Register Replacement                                  ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                  ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                    ; On                 ; On                 ;
+; Strict RAM Replacement                                           ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                           ; Off                ; Off                ;
+; Auto RAM Block Balancing                                         ; On                 ; On                 ;
+; Auto RAM to Logic Cell Conversion                                ; Off                ; Off                ;
+; Auto Resource Sharing                                            ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                               ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                               ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                    ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing              ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                ; Off                ; Off                ;
+; Timing-Driven Synthesis                                          ; On                 ; On                 ;
+; Report Parameter Settings                                        ; On                 ; On                 ;
+; Report Source Assignments                                        ; On                 ; On                 ;
+; Report Connectivity Checks                                       ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                               ; Off                ; Off                ;
+; Synchronization Register Chain Length                            ; 2                  ; 2                  ;
+; Power Optimization During Synthesis                              ; Normal compilation ; Normal compilation ;
+; HDL message level                                                ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                  ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report         ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report               ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report        ; 100                ; 100                ;
+; Clock MUX Protection                                             ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                      ; Off                ; Off                ;
+; Block Design Naming                                              ; Auto               ; Auto               ;
+; SDC constraint protection                                        ; Off                ; Off                ;
+; Synthesis Effort                                                 ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal     ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                             ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                               ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                      ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                           ; On                 ; On                 ;
++------------------------------------------------------------------+--------------------+--------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 12          ;
+; Maximum allowed            ; 6           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 6           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
+;     Processors 2-6         ;   0.0%      ;
++----------------------------+-------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                            ;
++---------------------------------------------+-----------------+------------------------+------------------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path            ; Used in Netlist ; File Type              ; File Name with Absolute Path                                                                   ; Library ;
++---------------------------------------------+-----------------+------------------------+------------------------------------------------------------------------------------------------+---------+
+; rtl/ohwr/modules/common/gencores_pkg.vhd    ; yes             ; User VHDL File         ; A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/common/gencores_pkg.vhd    ;         ;
+; rtl/ohwr/modules/common/gc_edge_detect.vhd  ; yes             ; User VHDL File         ; A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/common/gc_edge_detect.vhd  ;         ;
+; rtl/ohwr/modules/common/gc_sync.vhd         ; yes             ; User VHDL File         ; A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/common/gc_sync.vhd         ;         ;
+; rtl/ohwr/modules/common/gc_fsm_watchdog.vhd ; yes             ; User VHDL File         ; A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/common/gc_fsm_watchdog.vhd ;         ;
+; rtl/ohwr/modules/common/gc_sync_ffs.vhd     ; yes             ; User VHDL File         ; A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/common/gc_sync_ffs.vhd     ;         ;
+; rtl/custom/ssa_top.v                        ; yes             ; User Verilog HDL File  ; A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/custom/ssa_top.v                        ;         ;
+; rtl/custom/slow_comparator_core.v           ; yes             ; User Verilog HDL File  ; A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/custom/slow_comparator_core.v           ;         ;
+; rtl/custom/overdrive_protect_unit.v         ; yes             ; User Verilog HDL File  ; A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/custom/overdrive_protect_unit.v         ;         ;
+; rtl/custom/module_health_monitor.v          ; yes             ; User Verilog HDL File  ; A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/custom/module_health_monitor.v          ;         ;
+; rtl/custom/interlock_aggregation_matrix.v   ; yes             ; User Verilog HDL File  ; A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/custom/interlock_aggregation_matrix.v   ;         ;
+; rtl/custom/iir_rc_filter.v                  ; yes             ; User Verilog HDL File  ; A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/custom/iir_rc_filter.v                  ;         ;
+; rtl/custom/fast_comparator_core.v           ; yes             ; User Verilog HDL File  ; A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/custom/fast_comparator_core.v           ;         ;
+; rtl/custom/lost_drive_watchdog.v            ; yes             ; User Verilog HDL File  ; A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/custom/lost_drive_watchdog.v            ;         ;
++---------------------------------------------+-----------------+------------------------+------------------------------------------------------------------------------------------------+---------+
+
+
++---------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary ;
++--------------------------+------------------+
+; Resource                 ; Usage            ;
++--------------------------+------------------+
+; I/O pins                 ; 279              ;
+;                          ;                  ;
+; DSP block 9-bit elements ; 0                ;
+;                          ;                  ;
+; Maximum fan-out node     ; rst_n_pin~input  ;
+; Maximum fan-out          ; 64               ;
+; Total fan-out            ; 2280             ;
+; Average fan-out          ; 1.85             ;
++--------------------------+------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                ;
++---------------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+-----------+------+--------------+-----------------------------------------------------------+------------------------------+--------------+
+; Compilation Hierarchy Node                        ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; DSP 36x36 ; Pins ; Virtual Pins ; Full Hierarchy Name                                       ; Entity Name                  ; Library Name ;
++---------------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+-----------+------+--------------+-----------------------------------------------------------+------------------------------+--------------+
+; |ssa_top                                          ; 611 (1)             ; 64 (1)                    ; 0           ; 0            ; 0       ; 0         ; 0         ; 279  ; 0            ; |ssa_top                                                  ; ssa_top                      ; work         ;
+;    |fast_comparator_core:u_fast_comp|             ; 6 (6)               ; 1 (1)                     ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |ssa_top|fast_comparator_core:u_fast_comp                 ; fast_comparator_core         ; work         ;
+;    |gc_sync_ffs:u_sync_fast|                      ; 0 (0)               ; 3 (1)                     ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |ssa_top|gc_sync_ffs:u_sync_fast                          ; gc_sync_ffs                  ; work         ;
+;       |gc_sync:cmp_gc_sync|                       ; 0 (0)               ; 2 (2)                     ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |ssa_top|gc_sync_ffs:u_sync_fast|gc_sync:cmp_gc_sync      ; gc_sync                      ; work         ;
+;    |gc_sync_ffs:u_sync_overdrive|                 ; 0 (0)               ; 3 (1)                     ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |ssa_top|gc_sync_ffs:u_sync_overdrive                     ; gc_sync_ffs                  ; work         ;
+;       |gc_sync:cmp_gc_sync|                       ; 0 (0)               ; 2 (2)                     ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |ssa_top|gc_sync_ffs:u_sync_overdrive|gc_sync:cmp_gc_sync ; gc_sync                      ; work         ;
+;    |gc_sync_ffs:u_sync_slow|                      ; 0 (0)               ; 3 (1)                     ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |ssa_top|gc_sync_ffs:u_sync_slow                          ; gc_sync_ffs                  ; work         ;
+;       |gc_sync:cmp_gc_sync|                       ; 0 (0)               ; 2 (2)                     ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |ssa_top|gc_sync_ffs:u_sync_slow|gc_sync:cmp_gc_sync      ; gc_sync                      ; work         ;
+;    |gc_sync_ffs:u_sync_unbalance|                 ; 0 (0)               ; 3 (1)                     ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |ssa_top|gc_sync_ffs:u_sync_unbalance                     ; gc_sync_ffs                  ; work         ;
+;       |gc_sync:cmp_gc_sync|                       ; 0 (0)               ; 2 (2)                     ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |ssa_top|gc_sync_ffs:u_sync_unbalance|gc_sync:cmp_gc_sync ; gc_sync                      ; work         ;
+;    |iir_rc_filter:u_filter|                       ; 64 (64)             ; 32 (32)                   ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |ssa_top|iir_rc_filter:u_filter                           ; iir_rc_filter                ; work         ;
+;    |interlock_aggregation_matrix:u_central_brain| ; 20 (20)             ; 15 (15)                   ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |ssa_top|interlock_aggregation_matrix:u_central_brain     ; interlock_aggregation_matrix ; work         ;
+;    |module_health_monitor:u_health_mon|           ; 508 (508)           ; 1 (1)                     ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |ssa_top|module_health_monitor:u_health_mon               ; module_health_monitor        ; work         ;
+;    |overdrive_protect_unit:u_overdrive_comp|      ; 6 (6)               ; 1 (1)                     ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |ssa_top|overdrive_protect_unit:u_overdrive_comp          ; overdrive_protect_unit       ; work         ;
+;    |slow_comparator_core:u_slow_comp|             ; 6 (6)               ; 1 (1)                     ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |ssa_top|slow_comparator_core:u_slow_comp                 ; slow_comparator_core         ; work         ;
++---------------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+-----------+------+--------------+-----------------------------------------------------------+------------------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 64    ;
+; Number of registers using Synchronous Clear  ; 48    ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 64    ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 12    ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                          ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------------------------+
+; 3:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |ssa_top|interlock_aggregation_matrix:u_central_brain|holdoff_counter[11] ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: lost_drive_watchdog:u_lost_drive_watchdog|gc_fsm_watchdog:U_CORE_TIMER ;
++----------------+-------+--------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                       ;
++----------------+-------+--------------------------------------------------------------------------------------------+
+; g_wdt_max      ; 50000 ; Signed Integer                                                                             ;
++----------------+-------+--------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: gc_sync_ffs:u_sync_fast ;
++----------------+----------+------------------------------------------+
+; Parameter Name ; Value    ; Type                                     ;
++----------------+----------+------------------------------------------+
+; g_SYNC_EDGE    ; positive ; String                                   ;
++----------------+----------+------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: gc_sync_ffs:u_sync_fast|gc_sync:cmp_gc_sync ;
++----------------+----------+--------------------------------------------------------------+
+; Parameter Name ; Value    ; Type                                                         ;
++----------------+----------+--------------------------------------------------------------+
+; g_sync_edge    ; positive ; String                                                       ;
++----------------+----------+--------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: gc_sync_ffs:u_sync_fast|gc_edge_detect:cmp_gc_posedge ;
++----------------+----------+------------------------------------------------------------------------+
+; Parameter Name ; Value    ; Type                                                                   ;
++----------------+----------+------------------------------------------------------------------------+
+; g_async_rst    ; true     ; Enumerated                                                             ;
+; g_pulse_edge   ; positive ; String                                                                 ;
+; g_clock_edge   ; positive ; String                                                                 ;
++----------------+----------+------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: gc_sync_ffs:u_sync_fast|gc_edge_detect:cmp_gc_negedge ;
++----------------+----------+------------------------------------------------------------------------+
+; Parameter Name ; Value    ; Type                                                                   ;
++----------------+----------+------------------------------------------------------------------------+
+; g_async_rst    ; true     ; Enumerated                                                             ;
+; g_pulse_edge   ; negative ; String                                                                 ;
+; g_clock_edge   ; positive ; String                                                                 ;
++----------------+----------+------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: gc_sync_ffs:u_sync_slow ;
++----------------+----------+------------------------------------------+
+; Parameter Name ; Value    ; Type                                     ;
++----------------+----------+------------------------------------------+
+; g_SYNC_EDGE    ; positive ; String                                   ;
++----------------+----------+------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: gc_sync_ffs:u_sync_slow|gc_sync:cmp_gc_sync ;
++----------------+----------+--------------------------------------------------------------+
+; Parameter Name ; Value    ; Type                                                         ;
++----------------+----------+--------------------------------------------------------------+
+; g_sync_edge    ; positive ; String                                                       ;
++----------------+----------+--------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: gc_sync_ffs:u_sync_slow|gc_edge_detect:cmp_gc_posedge ;
++----------------+----------+------------------------------------------------------------------------+
+; Parameter Name ; Value    ; Type                                                                   ;
++----------------+----------+------------------------------------------------------------------------+
+; g_async_rst    ; true     ; Enumerated                                                             ;
+; g_pulse_edge   ; positive ; String                                                                 ;
+; g_clock_edge   ; positive ; String                                                                 ;
++----------------+----------+------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: gc_sync_ffs:u_sync_slow|gc_edge_detect:cmp_gc_negedge ;
++----------------+----------+------------------------------------------------------------------------+
+; Parameter Name ; Value    ; Type                                                                   ;
++----------------+----------+------------------------------------------------------------------------+
+; g_async_rst    ; true     ; Enumerated                                                             ;
+; g_pulse_edge   ; negative ; String                                                                 ;
+; g_clock_edge   ; positive ; String                                                                 ;
++----------------+----------+------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: gc_sync_ffs:u_sync_overdrive ;
++----------------+----------+-----------------------------------------------+
+; Parameter Name ; Value    ; Type                                          ;
++----------------+----------+-----------------------------------------------+
+; g_SYNC_EDGE    ; positive ; String                                        ;
++----------------+----------+-----------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: gc_sync_ffs:u_sync_overdrive|gc_sync:cmp_gc_sync ;
++----------------+----------+-------------------------------------------------------------------+
+; Parameter Name ; Value    ; Type                                                              ;
++----------------+----------+-------------------------------------------------------------------+
+; g_sync_edge    ; positive ; String                                                            ;
++----------------+----------+-------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: gc_sync_ffs:u_sync_overdrive|gc_edge_detect:cmp_gc_posedge ;
++----------------+----------+-----------------------------------------------------------------------------+
+; Parameter Name ; Value    ; Type                                                                        ;
++----------------+----------+-----------------------------------------------------------------------------+
+; g_async_rst    ; true     ; Enumerated                                                                  ;
+; g_pulse_edge   ; positive ; String                                                                      ;
+; g_clock_edge   ; positive ; String                                                                      ;
++----------------+----------+-----------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: gc_sync_ffs:u_sync_overdrive|gc_edge_detect:cmp_gc_negedge ;
++----------------+----------+-----------------------------------------------------------------------------+
+; Parameter Name ; Value    ; Type                                                                        ;
++----------------+----------+-----------------------------------------------------------------------------+
+; g_async_rst    ; true     ; Enumerated                                                                  ;
+; g_pulse_edge   ; negative ; String                                                                      ;
+; g_clock_edge   ; positive ; String                                                                      ;
++----------------+----------+-----------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: gc_sync_ffs:u_sync_unbalance ;
++----------------+----------+-----------------------------------------------+
+; Parameter Name ; Value    ; Type                                          ;
++----------------+----------+-----------------------------------------------+
+; g_SYNC_EDGE    ; positive ; String                                        ;
++----------------+----------+-----------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: gc_sync_ffs:u_sync_unbalance|gc_sync:cmp_gc_sync ;
++----------------+----------+-------------------------------------------------------------------+
+; Parameter Name ; Value    ; Type                                                              ;
++----------------+----------+-------------------------------------------------------------------+
+; g_sync_edge    ; positive ; String                                                            ;
++----------------+----------+-------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: gc_sync_ffs:u_sync_unbalance|gc_edge_detect:cmp_gc_posedge ;
++----------------+----------+-----------------------------------------------------------------------------+
+; Parameter Name ; Value    ; Type                                                                        ;
++----------------+----------+-----------------------------------------------------------------------------+
+; g_async_rst    ; true     ; Enumerated                                                                  ;
+; g_pulse_edge   ; positive ; String                                                                      ;
+; g_clock_edge   ; positive ; String                                                                      ;
++----------------+----------+-----------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: gc_sync_ffs:u_sync_unbalance|gc_edge_detect:cmp_gc_negedge ;
++----------------+----------+-----------------------------------------------------------------------------+
+; Parameter Name ; Value    ; Type                                                                        ;
++----------------+----------+-----------------------------------------------------------------------------+
+; g_async_rst    ; true     ; Enumerated                                                                  ;
+; g_pulse_edge   ; negative ; String                                                                      ;
+; g_clock_edge   ; positive ; String                                                                      ;
++----------------+----------+-----------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------+
+; Port Connectivity Checks: "gc_sync_ffs:u_sync_unbalance" ;
++----------+--------+----------+---------------------------+
+; Port     ; Type   ; Severity ; Details                   ;
++----------+--------+----------+---------------------------+
+; npulse_o ; Output ; Info     ; Explicitly unconnected    ;
+; ppulse_o ; Output ; Info     ; Explicitly unconnected    ;
++----------+--------+----------+---------------------------+
+
+
++----------------------------------------------------------+
+; Port Connectivity Checks: "gc_sync_ffs:u_sync_overdrive" ;
++----------+--------+----------+---------------------------+
+; Port     ; Type   ; Severity ; Details                   ;
++----------+--------+----------+---------------------------+
+; npulse_o ; Output ; Info     ; Explicitly unconnected    ;
+; ppulse_o ; Output ; Info     ; Explicitly unconnected    ;
++----------+--------+----------+---------------------------+
+
+
++-------------------------------------------------------+
+; Port Connectivity Checks: "gc_sync_ffs:u_sync_slow"   ;
++----------+--------+----------+------------------------+
+; Port     ; Type   ; Severity ; Details                ;
++----------+--------+----------+------------------------+
+; npulse_o ; Output ; Info     ; Explicitly unconnected ;
+; ppulse_o ; Output ; Info     ; Explicitly unconnected ;
++----------+--------+----------+------------------------+
+
+
++-------------------------------------------------------+
+; Port Connectivity Checks: "gc_sync_ffs:u_sync_fast"   ;
++----------+--------+----------+------------------------+
+; Port     ; Type   ; Severity ; Details                ;
++----------+--------+----------+------------------------+
+; npulse_o ; Output ; Info     ; Explicitly unconnected ;
+; ppulse_o ; Output ; Info     ; Explicitly unconnected ;
++----------+--------+----------+------------------------+
+
+
++----------------------------------------------------------------+
+; Port Connectivity Checks: "module_health_monitor:u_health_mon" ;
++---------------+--------+----------+----------------------------+
+; Port          ; Type   ; Severity ; Details                    ;
++---------------+--------+----------+----------------------------+
+; fault_alarm_o ; Output ; Info     ; Explicitly unconnected     ;
++---------------+--------+----------+----------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "lost_drive_watchdog:u_lost_drive_watchdog"                                                       ;
++-------------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port              ; Type   ; Severity ; Details                                                                             ;
++-------------------+--------+----------+-------------------------------------------------------------------------------------+
+; lost_drive_trip_o ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-------------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++---------------------------------------------------------------------+
+; Port Connectivity Checks: "overdrive_protect_unit:u_overdrive_comp" ;
++-------------------------+-------+----------+------------------------+
+; Port                    ; Type  ; Severity ; Details                ;
++-------------------------+-------+----------+------------------------+
+; thres_overdrive[13..12] ; Input ; Info     ; Stuck at VCC           ;
+; thres_overdrive[11..0]  ; Input ; Info     ; Stuck at GND           ;
+; thres_overdrive[15]     ; Input ; Info     ; Stuck at VCC           ;
+; thres_overdrive[14]     ; Input ; Info     ; Stuck at GND           ;
++-------------------------+-------+----------+------------------------+
+
+
++--------------------------------------------------------------+
+; Port Connectivity Checks: "slow_comparator_core:u_slow_comp" ;
++-------------------------+-------+----------+-----------------+
+; Port                    ; Type  ; Severity ; Details         ;
++-------------------------+-------+----------+-----------------+
+; thres_slow_50kw[13..11] ; Input ; Info     ; Stuck at GND    ;
+; thres_slow_50kw[7..0]   ; Input ; Info     ; Stuck at GND    ;
+; thres_slow_50kw[15]     ; Input ; Info     ; Stuck at GND    ;
+; thres_slow_50kw[14]     ; Input ; Info     ; Stuck at VCC    ;
+; thres_slow_50kw[10]     ; Input ; Info     ; Stuck at VCC    ;
+; thres_slow_50kw[9]      ; Input ; Info     ; Stuck at GND    ;
+; thres_slow_50kw[8]      ; Input ; Info     ; Stuck at VCC    ;
++-------------------------+-------+----------+-----------------+
+
+
++--------------------------------------------------------------+
+; Port Connectivity Checks: "fast_comparator_core:u_fast_comp" ;
++--------------------------+-------+----------+----------------+
+; Port                     ; Type  ; Severity ; Details        ;
++--------------------------+-------+----------+----------------+
+; thres_fast_150kw[15..14] ; Input ; Info     ; Stuck at VCC   ;
+; thres_fast_150kw[11..0]  ; Input ; Info     ; Stuck at GND   ;
+; thres_fast_150kw[13]     ; Input ; Info     ; Stuck at GND   ;
+; thres_fast_150kw[12]     ; Input ; Info     ; Stuck at VCC   ;
++--------------------------+-------+----------+----------------+
+
+
++-----------------------------------------------------+
+; Post-Synthesis Netlist Statistics for Top Partition ;
++-----------------------+-----------------------------+
+; Type                  ; Count                       ;
++-----------------------+-----------------------------+
+; boundary_port         ; 279                         ;
+; cycloneiii_ff         ; 64                          ;
+;     CLR               ; 16                          ;
+;     CLR SCLR          ; 36                          ;
+;     ENA CLR SCLR      ; 12                          ;
+; cycloneiii_lcell_comb ; 611                         ;
+;     arith             ; 323                         ;
+;         2 data inputs ; 61                          ;
+;         3 data inputs ; 262                         ;
+;     normal            ; 288                         ;
+;         0 data inputs ; 57                          ;
+;         1 data inputs ; 4                           ;
+;         2 data inputs ; 30                          ;
+;         3 data inputs ; 13                          ;
+;         4 data inputs ; 184                         ;
+;                       ;                             ;
+; Max LUT depth         ; 15.50                       ;
+; Average LUT depth     ; 10.04                       ;
++-----------------------+-----------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:01     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Analysis & Synthesis
+    Info: Version 22.1std.2 Build 922 07/20/2023 SC Lite Edition
+    Info: Processing started: Tue Jun 30 21:46:44 2026
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off ssa_interlock -c ssa_top
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Info (20030): Parallel compilation is enabled and will use 6 of the 6 processors detected
+Info (12021): Found 2 design units, including 0 entities, in source file rtl/ohwr/modules/common/gencores_pkg.vhd
+    Info (12022): Found design unit 1: gencores_pkg File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/common/gencores_pkg.vhd Line: 30
+    Info (12022): Found design unit 2: gencores_pkg-body File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/common/gencores_pkg.vhd Line: 826
+Info (12021): Found 2 design units, including 0 entities, in source file rtl/ohwr/modules/genrams/genram_pkg.vhd
+    Info (12022): Found design unit 1: genram_pkg File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/genrams/genram_pkg.vhd Line: 32
+    Info (12022): Found design unit 2: genram_pkg-body File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/genrams/genram_pkg.vhd Line: 291
+Info (12021): Found 2 design units, including 1 entities, in source file rtl/ohwr/modules/common/gc_edge_detect.vhd
+    Info (12022): Found design unit 1: gc_edge_detect-arch File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/common/gc_edge_detect.vhd Line: 44
+    Info (12023): Found entity 1: gc_edge_detect File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/common/gc_edge_detect.vhd Line: 28
+Info (12021): Found 2 design units, including 1 entities, in source file rtl/ohwr/modules/common/gc_sync.vhd
+    Info (12022): Found design unit 1: gc_sync-arch File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/common/gc_sync.vhd Line: 42
+    Info (12023): Found entity 1: gc_sync File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/common/gc_sync.vhd Line: 28
+Warning (10335): Unrecognized synthesis attribute "keep_hierarchy" at rtl/ohwr/modules/genrams/common/inferred_async_fifo.vhd(89) File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/genrams/common/inferred_async_fifo.vhd Line: 89
+Warning (10335): Unrecognized synthesis attribute "ram_type" at rtl/ohwr/modules/genrams/common/inferred_async_fifo.vhd(134) File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/genrams/common/inferred_async_fifo.vhd Line: 134
+Info (12021): Found 2 design units, including 1 entities, in source file rtl/ohwr/modules/genrams/common/inferred_async_fifo.vhd
+    Info (12022): Found design unit 1: inferred_async_fifo-syn File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/genrams/common/inferred_async_fifo.vhd Line: 94
+    Info (12023): Found entity 1: inferred_async_fifo File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/genrams/common/inferred_async_fifo.vhd Line: 35
+Info (12021): Found 2 design units, including 1 entities, in source file rtl/ohwr/modules/genrams/generic/generic_async_fifo.vhd
+    Info (12022): Found design unit 1: generic_async_fifo-syn File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/genrams/generic/generic_async_fifo.vhd Line: 91
+    Info (12023): Found entity 1: generic_async_fifo File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/genrams/generic/generic_async_fifo.vhd Line: 35
+Info (12021): Found 2 design units, including 1 entities, in source file rtl/ohwr/modules/genrams/altera/generic_spram.vhd
+    Info (12022): Found design unit 1: generic_spram-syn File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/genrams/altera/generic_spram.vhd Line: 54
+    Info (12023): Found entity 1: generic_spram File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/genrams/altera/generic_spram.vhd Line: 36
+Info (12021): Found 2 design units, including 1 entities, in source file rtl/ohwr/modules/genrams/altera/generic_dpram.vhd
+    Info (12022): Found design unit 1: generic_dpram-syn File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/genrams/altera/generic_dpram.vhd Line: 74
+    Info (12023): Found entity 1: generic_dpram File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/genrams/altera/generic_dpram.vhd Line: 38
+Info (12021): Found 2 design units, including 1 entities, in source file rtl/ohwr/modules/common/gc_fsm_watchdog.vhd
+    Info (12022): Found design unit 1: gc_fsm_watchdog-behav File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/common/gc_fsm_watchdog.vhd Line: 64
+    Info (12023): Found entity 1: gc_fsm_watchdog File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/common/gc_fsm_watchdog.vhd Line: 43
+Info (12021): Found 2 design units, including 1 entities, in source file rtl/ohwr/modules/common/gc_comparator.vhd
+    Info (12022): Found design unit 1: gc_comparator-arch File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/common/gc_comparator.vhd Line: 77
+    Info (12023): Found entity 1: gc_comparator File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/common/gc_comparator.vhd Line: 53
+Info (12021): Found 2 design units, including 1 entities, in source file rtl/ohwr/modules/common/gc_big_adder.vhd
+    Info (12022): Found design unit 1: gc_big_adder-rtl File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/common/gc_big_adder.vhd Line: 54
+    Info (12023): Found entity 1: gc_big_adder File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/common/gc_big_adder.vhd Line: 39
+Info (12021): Found 2 design units, including 1 entities, in source file rtl/ohwr/modules/common/gc_extend_pulse.vhd
+    Info (12022): Found design unit 1: gc_extend_pulse-rtl File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/common/gc_extend_pulse.vhd Line: 60
+    Info (12023): Found entity 1: gc_extend_pulse File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/common/gc_extend_pulse.vhd Line: 45
+Info (12021): Found 2 design units, including 1 entities, in source file rtl/ohwr/modules/common/gc_glitch_filt.vhd
+    Info (12022): Found design unit 1: gc_glitch_filt-behav File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/common/gc_glitch_filt.vhd Line: 58
+    Info (12023): Found entity 1: gc_glitch_filt File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/common/gc_glitch_filt.vhd Line: 34
+Info (12021): Found 2 design units, including 1 entities, in source file rtl/ohwr/modules/common/gc_pulse_synchronizer.vhd
+    Info (12022): Found design unit 1: gc_pulse_synchronizer-rtl File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/common/gc_pulse_synchronizer.vhd Line: 50
+    Info (12023): Found entity 1: gc_pulse_synchronizer File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/common/gc_pulse_synchronizer.vhd Line: 31
+Info (12021): Found 2 design units, including 1 entities, in source file rtl/ohwr/modules/common/gc_sync_ffs.vhd
+    Info (12022): Found design unit 1: gc_sync_ffs-arch File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/common/gc_sync_ffs.vhd Line: 42
+    Info (12023): Found entity 1: gc_sync_ffs File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/common/gc_sync_ffs.vhd Line: 29
+Info (12021): Found 1 design units, including 1 entities, in source file rtl/custom/ssa_top.v
+    Info (12023): Found entity 1: ssa_top File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/custom/ssa_top.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file rtl/custom/slow_comparator_core.v
+    Info (12023): Found entity 1: slow_comparator_core File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/custom/slow_comparator_core.v Line: 9
+Info (12021): Found 1 design units, including 1 entities, in source file rtl/custom/rf_envelope_processing.v
+    Info (12023): Found entity 1: rf_envelope_processing File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/custom/rf_envelope_processing.v Line: 3
+Info (12021): Found 1 design units, including 1 entities, in source file rtl/custom/overdrive_protect_unit.v
+    Info (12023): Found entity 1: overdrive_protect_unit File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/custom/overdrive_protect_unit.v Line: 7
+Info (12021): Found 1 design units, including 1 entities, in source file rtl/custom/module_health_monitor.v
+    Info (12023): Found entity 1: module_health_monitor File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/custom/module_health_monitor.v Line: 8
+Info (12021): Found 1 design units, including 1 entities, in source file rtl/custom/interlock_aggregation_matrix.v
+    Info (12023): Found entity 1: interlock_aggregation_matrix File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/custom/interlock_aggregation_matrix.v Line: 8
+Info (12021): Found 1 design units, including 1 entities, in source file rtl/custom/iir_rc_filter.v
+    Info (12023): Found entity 1: iir_rc_filter File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/custom/iir_rc_filter.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file rtl/custom/fast_comparator_core.v
+    Info (12023): Found entity 1: fast_comparator_core File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/custom/fast_comparator_core.v Line: 3
+Info (12021): Found 1 design units, including 1 entities, in source file rtl/custom/testbench/ssa_top_tb.v
+    Info (12023): Found entity 1: ssa_top_tb File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/custom/Testbench/ssa_top_tb.v Line: 3
+Info (12021): Found 1 design units, including 1 entities, in source file rtl/custom/lost_drive_watchdog.v
+    Info (12023): Found entity 1: lost_drive_watchdog File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/custom/lost_drive_watchdog.v Line: 3
+Info (12127): Elaborating entity "ssa_top" for the top level hierarchy
+Info (12128): Elaborating entity "fast_comparator_core" for hierarchy "fast_comparator_core:u_fast_comp" File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/custom/ssa_top.v Line: 77
+Info (12128): Elaborating entity "iir_rc_filter" for hierarchy "iir_rc_filter:u_filter" File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/custom/ssa_top.v Line: 86
+Info (12128): Elaborating entity "slow_comparator_core" for hierarchy "slow_comparator_core:u_slow_comp" File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/custom/ssa_top.v Line: 96
+Info (12128): Elaborating entity "overdrive_protect_unit" for hierarchy "overdrive_protect_unit:u_overdrive_comp" File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/custom/ssa_top.v Line: 106
+Info (12128): Elaborating entity "lost_drive_watchdog" for hierarchy "lost_drive_watchdog:u_lost_drive_watchdog" File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/custom/ssa_top.v Line: 116
+Info (12128): Elaborating entity "gc_fsm_watchdog" for hierarchy "lost_drive_watchdog:u_lost_drive_watchdog|gc_fsm_watchdog:U_CORE_TIMER" File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/custom/lost_drive_watchdog.v Line: 46
+Info (12128): Elaborating entity "module_health_monitor" for hierarchy "module_health_monitor:u_health_mon" File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/custom/ssa_top.v Line: 132
+Info (12128): Elaborating entity "gc_sync_ffs" for hierarchy "gc_sync_ffs:u_sync_fast" File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/custom/ssa_top.v Line: 148
+Info (12128): Elaborating entity "gc_sync" for hierarchy "gc_sync_ffs:u_sync_fast|gc_sync:cmp_gc_sync" File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/common/gc_sync_ffs.vhd Line: 48
+Info (12128): Elaborating entity "gc_edge_detect" for hierarchy "gc_sync_ffs:u_sync_fast|gc_edge_detect:cmp_gc_posedge" File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/common/gc_sync_ffs.vhd Line: 57
+Info (12128): Elaborating entity "gc_edge_detect" for hierarchy "gc_sync_ffs:u_sync_fast|gc_edge_detect:cmp_gc_negedge" File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/common/gc_sync_ffs.vhd Line: 68
+Info (12128): Elaborating entity "interlock_aggregation_matrix" for hierarchy "interlock_aggregation_matrix:u_central_brain" File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/custom/ssa_top.v Line: 194
+Info (286030): Timing-Driven Synthesis is running
+Info (144001): Generated suppressed messages file A:/VHDL/ssa_interlock_project/ssa_interlock_system/output_files/ssa_top.map.smsg
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Info (21057): Implemented 902 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 277 input pins
+    Info (21059): Implemented 2 output pins
+    Info (21061): Implemented 623 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 3 warnings
+    Info: Peak virtual memory: 4953 megabytes
+    Info: Processing ended: Tue Jun 30 21:47:03 2026
+    Info: Elapsed time: 00:00:19
+    Info: Total CPU time (on all processors): 00:00:17
+
+
++------------------------------------------+
+; Analysis & Synthesis Suppressed Messages ;
++------------------------------------------+
+The suppressed messages can be found in A:/VHDL/ssa_interlock_project/ssa_interlock_system/output_files/ssa_top.map.smsg.
+
+

@@ -1,0 +1,1125 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "rf_gate_disable_pin",
+					"strict" : false
+				},
+				{
+					"name" : "psu_contactor_pin",
+					"strict" : false
+				},
+				{
+					"name" : "clk_fast_pin",
+					"strict" : false
+				},
+				{
+					"name" : "rst_n_pin",
+					"strict" : false
+				},
+				{
+					"name" : "clk_sys_pin",
+					"strict" : false
+				},
+				{
+					"name" : "interlock_reset_pin",
+					"strict" : false
+				},
+				{
+					"name" : "adc_p_refl_pin[14]",
+					"strict" : false
+				},
+				{
+					"name" : "adc_p_refl_pin[15]",
+					"strict" : false
+				},
+				{
+					"name" : "adc_p_refl_pin[13]",
+					"strict" : false
+				},
+				{
+					"name" : "adc_p_refl_pin[12]",
+					"strict" : false
+				},
+				{
+					"name" : "adc_p_refl_pin[0]",
+					"strict" : false
+				},
+				{
+					"name" : "adc_p_refl_pin[1]",
+					"strict" : false
+				},
+				{
+					"name" : "adc_p_refl_pin[2]",
+					"strict" : false
+				},
+				{
+					"name" : "adc_p_refl_pin[3]",
+					"strict" : false
+				},
+				{
+					"name" : "adc_p_refl_pin[4]",
+					"strict" : false
+				},
+				{
+					"name" : "adc_p_refl_pin[5]",
+					"strict" : false
+				},
+				{
+					"name" : "adc_p_refl_pin[6]",
+					"strict" : false
+				},
+				{
+					"name" : "adc_p_refl_pin[7]",
+					"strict" : false
+				},
+				{
+					"name" : "adc_p_refl_pin[8]",
+					"strict" : false
+				},
+				{
+					"name" : "adc_p_refl_pin[9]",
+					"strict" : false
+				},
+				{
+					"name" : "adc_p_refl_pin[10]",
+					"strict" : false
+				},
+				{
+					"name" : "adc_p_refl_pin[11]",
+					"strict" : false
+				},
+				{
+					"name" : "adc_p_drive_pin[15]",
+					"strict" : false
+				},
+				{
+					"name" : "adc_p_drive_pin[14]",
+					"strict" : false
+				},
+				{
+					"name" : "adc_p_drive_pin[0]",
+					"strict" : false
+				},
+				{
+					"name" : "adc_p_drive_pin[1]",
+					"strict" : false
+				},
+				{
+					"name" : "adc_p_drive_pin[2]",
+					"strict" : false
+				},
+				{
+					"name" : "adc_p_drive_pin[3]",
+					"strict" : false
+				},
+				{
+					"name" : "adc_p_drive_pin[4]",
+					"strict" : false
+				},
+				{
+					"name" : "adc_p_drive_pin[5]",
+					"strict" : false
+				},
+				{
+					"name" : "adc_p_drive_pin[6]",
+					"strict" : false
+				},
+				{
+					"name" : "adc_p_drive_pin[7]",
+					"strict" : false
+				},
+				{
+					"name" : "adc_p_drive_pin[8]",
+					"strict" : false
+				},
+				{
+					"name" : "adc_p_drive_pin[9]",
+					"strict" : false
+				},
+				{
+					"name" : "adc_p_drive_pin[10]",
+					"strict" : false
+				},
+				{
+					"name" : "adc_p_drive_pin[11]",
+					"strict" : false
+				},
+				{
+					"name" : "adc_p_drive_pin[12]",
+					"strict" : false
+				},
+				{
+					"name" : "adc_p_drive_pin[13]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_telemetry_pin",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[237]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[238]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[215]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[216]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[217]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[218]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[219]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[220]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[221]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[222]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[207]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[208]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[209]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[210]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[211]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[212]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[213]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[214]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[199]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[200]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[201]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[202]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[203]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[204]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[205]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[206]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[191]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[192]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[193]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[194]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[195]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[196]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[197]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[198]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[231]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[232]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[233]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[234]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[235]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[236]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[223]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[224]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[225]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[226]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[227]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[228]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[229]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[230]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[183]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[184]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[185]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[186]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[187]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[188]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[189]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[190]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[175]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[176]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[177]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[178]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[179]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[180]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[181]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[182]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[167]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[168]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[169]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[170]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[171]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[172]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[173]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[174]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[159]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[160]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[161]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[162]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[163]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[164]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[165]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[166]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[151]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[152]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[153]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[154]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[155]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[156]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[157]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[158]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[143]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[144]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[145]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[146]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[147]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[148]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[149]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[150]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[135]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[136]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[137]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[138]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[139]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[140]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[141]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[142]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[127]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[128]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[129]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[130]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[131]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[132]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[133]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[134]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[125]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[126]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[119]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[120]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[121]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[122]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[123]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[124]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[111]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[112]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[113]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[114]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[115]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[116]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[117]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[118]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[103]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[104]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[105]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[106]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[107]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[108]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[109]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[110]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[95]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[96]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[97]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[98]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[99]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[100]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[101]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[102]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[87]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[88]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[89]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[90]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[91]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[92]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[93]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[94]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[79]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[80]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[81]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[82]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[83]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[84]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[85]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[86]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[71]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[72]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[73]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[74]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[75]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[76]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[77]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[78]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[63]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[64]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[65]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[66]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[67]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[68]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[69]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[70]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[61]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[62]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[39]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[40]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[41]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[42]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[43]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[44]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[45]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[46]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[31]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[32]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[33]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[34]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[35]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[36]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[37]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[38]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[55]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[56]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[57]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[58]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[59]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[60]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[47]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[48]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[49]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[50]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[51]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[52]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[53]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[54]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[29]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[30]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[23]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[24]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[25]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[26]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[27]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[28]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[15]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[16]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[17]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[18]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[19]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[20]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[21]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[22]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[13]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[14]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[6]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[3]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[4]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[5]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[2]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[0]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[1]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[7]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[8]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[9]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[10]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[11]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[12]",
+					"strict" : false
+				},
+				{
+					"name" : "module_fault_vector_pin[239]",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

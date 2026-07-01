@@ -1,30 +1,35 @@
 `timescale 1ns / 1ps
-
 module iir_rc_filter (
-    input  wire         clk_fast,          // 100 MHz RF sampling clock
-    input  wire         rst_n,             // Asynchronous active-low master reset
-    
-    input  wire [15:0]  adc_p_refl,        // Raw instantaneous reflected power
-    output wire [15:0]  p_refl_filtered    // 10µs averaged output power
+    input  wire        clk_fast,
+    input  wire        rst_n,
+    input  wire        force_clear_i,     // FIX #5b: instant accumulator drain
+    input  wire [15:0] adc_p_refl,
+    output wire [15:0] p_refl_filtered
 );
-
-    // 16-bit integer + 10-bit fractional space = 26-bit accumulator
-    reg [25:0] acc; 
-    
-    // Left-shift input to align with the fixed-point accumulator integer bits
-    wire [25:0] ext_input = {adc_p_refl, 10'b0};
-
+ 
+    // ALPHA_SHIFT = 13  →  tau ≈ 8192 clk_fast cycles ≈ 81.92 µs at 100 MHz
+    // Must satisfy: (16 - ALPHA_SHIFT) >= 0  →  ALPHA_SHIFT <= 16  ✓ (13 <= 16)
+    localparam integer ALPHA_SHIFT = 13;
+ 
+    // Q16.16 accumulator: upper 16 bits = integer output
+    reg [31:0] accumulator;
+ 
     always @(posedge clk_fast or negedge rst_n) begin
-        if (!rst_n) begin
-            acc <= 26'b0;
-        end else begin
-            // Multiplier-free IIR Formula: acc = acc + ((input - acc) >> 10)
-            // Using arithmetic right shift (>>>) to preserve sign bits safely
-            acc <= acc + ($signed(ext_input - acc) >>> 10);
+        if (!rst_n)
+            accumulator <= 32'd0;
+        else if (force_clear_i)           // FIX #5b: drain on interlock reset
+            accumulator <= 32'd0;
+        else begin
+            // IIR update: acc += (input - acc_top) >> ALPHA_SHIFT
+            // Equivalent to: acc = acc*(1 - 1/2^N) + input*(1/2^N) * 2^16
+            // Written to avoid signed arithmetic issues:
+            accumulator <= accumulator
+                         - (accumulator >> ALPHA_SHIFT)
+                         + ({16'd0, adc_p_refl} << (16 - ALPHA_SHIFT));
         end
     end
-
-    // Slice off the fractional bits to return a clean 16-bit power envelope
-    assign p_refl_filtered = acc[25:10];
-
+ 
+    // Output is the upper 16 bits of the Q16 accumulator
+    assign p_refl_filtered = accumulator[31:16];
+ 
 endmodule

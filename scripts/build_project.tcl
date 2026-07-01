@@ -1,10 +1,16 @@
 # scripts/build_project.tcl
-package require ::quartus::project
 
+# 1. CHANGE THESE TO MATCH YOUR ACTUAL FPGA CHIP
 set project_name "ssa_interlock"
-set target_device "10CX085YF672E6G" ;# Intel Cyclone 10 GX example device (adjust as needed)
-set family "Cyclone 10 GX"
+set family "Cyclone IV GX"          ;# Example: "Cyclone IV GX" or "Cyclone 10 GX"
+set target_device "EP4CGX15BF14C6"   ;# Replace with your exact chip part number
 
+# 2. Safely close any active project in the GUI to prevent file lock errors
+if {[is_project_open]} {
+    project_close
+}
+
+# 3. Create or open the project container
 if {[project_exists $project_name]} {
     project_open $project_name -current_revision
 } else {
@@ -24,6 +30,7 @@ set_global_assignment -name VERILOG_INPUT_VERSION SYSTEMVERILOG_2005
 # -------------------------------------------------------------------------
 set ohwr_dir "../rtl/ohwr/modules"
 
+set_global_assignment -name VHDL_FILE "$ohwr_dir/common/gencores_pkg.vhd"
 set_global_assignment -name VHDL_FILE "$ohwr_dir/common/gc_sync_ffs.vhd"
 set_global_assignment -name VHDL_FILE "$ohwr_dir/common/gc_pulse_synchronizer.vhd"
 set_global_assignment -name VHDL_FILE "$ohwr_dir/common/gc_glitch_filt.vhd"
@@ -52,7 +59,7 @@ set_global_assignment -name VERILOG_FILE "$custom_dir/interlock_aggregation_matr
 set_global_assignment -name VERILOG_FILE "$custom_dir/ssa_top.v"
 
 # Link Timing Constraints file
-set_global_assignment -name SDC_FILE "../constraints/ssa_interlock.sdc"
+set_global_assignment -name SDC_FILE "../constraints/ssa_timing.sdc"
 
 export_assignments
 project_close

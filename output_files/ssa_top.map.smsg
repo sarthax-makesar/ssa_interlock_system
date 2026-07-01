@@ -1,0 +1,7 @@
+Warning (10335): Unrecognized synthesis attribute "rloc" at rtl/ohwr/modules/common/gc_sync.vhd(52) File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/common/gc_sync.vhd Line: 52
+Warning (10335): Unrecognized synthesis attribute "rloc" at rtl/ohwr/modules/common/gc_sync.vhd(53) File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/common/gc_sync.vhd Line: 53
+Warning (10335): Unrecognized synthesis attribute "shreg_extract" at rtl/ohwr/modules/common/gc_sync.vhd(56) File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/common/gc_sync.vhd Line: 56
+Warning (10335): Unrecognized synthesis attribute "shreg_extract" at rtl/ohwr/modules/common/gc_sync.vhd(57) File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/common/gc_sync.vhd Line: 57
+Warning (10335): Unrecognized synthesis attribute "keep_hierarchy" at rtl/ohwr/modules/common/gc_sync.vhd(66) File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/common/gc_sync.vhd Line: 66
+Warning (10335): Unrecognized synthesis attribute "async_reg" at rtl/ohwr/modules/common/gc_sync.vhd(69) File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/common/gc_sync.vhd Line: 69
+Warning (10335): Unrecognized synthesis attribute "async_reg" at rtl/ohwr/modules/common/gc_sync.vhd(70) File: A:/VHDL/ssa_interlock_project/ssa_interlock_system/rtl/ohwr/modules/common/gc_sync.vhd Line: 70

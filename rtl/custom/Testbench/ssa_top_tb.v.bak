@@ -1,0 +1,219 @@
+`timescale 1ns / 1ps
+
+module ssa_top_tb;
+
+    // =========================================================================
+    // 1. SIGNAL DECLARATIONS (UUT INTERFACE)
+    // =========================================================================
+    reg          clk_fast_pin;
+    reg          clk_telemetry_pin;
+    reg          clk_sys_pin;
+    reg          rst_n_pin;
+    reg          interlock_reset_pin;
+    
+    reg  [15:0]  adc_p_refl_pin;
+    reg  [15:0]  adc_p_drive_pin;
+    reg  [239:0] module_fault_vector_pin;
+    
+    wire         rf_gate_disable_pin;
+    wire         psu_contactor_pin;
+
+    // =========================================================================
+    // 2. UNIT UNDER TEST (UUT) INSTANTIATION
+    // =========================================================================
+    ssa_top uut (
+        .clk_fast_pin            (clk_fast_pin),
+        .clk_telemetry_pin       (clk_telemetry_pin),
+        .clk_sys_pin             (clk_sys_pin),
+        .rst_n_pin               (rst_n_pin),
+        .interlock_reset_pin     (interlock_reset_pin),
+        .adc_p_refl_pin          (adc_p_refl_pin),
+        .adc_p_drive_pin         (adc_p_drive_pin),
+        .module_fault_vector_pin (module_fault_vector_pin),
+        .rf_gate_disable_pin     (rf_gate_disable_pin),
+        .psu_contactor_pin       (psu_contactor_pin)
+    );
+
+    // =========================================================================
+    // 3. INDEPENDENT CLOCK GENERATORS
+    // =========================================================================
+    // clk_fast: ~100 MHz RF sampling clock (10 ns period)
+    initial clk_fast_pin = 0;
+    always #5.0 clk_fast_pin = ~clk_fast_pin;
+
+    // clk_sys: ~50 MHz Master SoC/Interlock processing clock (20 ns period)
+    initial clk_sys_pin = 0;
+    always #10.0 clk_sys_pin = ~clk_sys_pin;
+
+    // clk_telemetry: ~10 MHz Slow pallet health bus clock (100 ns period)
+    initial clk_telemetry_pin = 0;
+    always #50.0 clk_telemetry_pin = ~clk_telemetry_pin;
+
+    // =========================================================================
+    // 4. MAIN STIMULUS COROUTINE
+    // =========================================================================
+    initial begin
+        // --- Initialization ---
+        $display("[TB START] Beginning 150kW SSA Interlock Verification Loop...");
+        rst_n_pin                = 1'b0;
+        interlock_reset_pin      = 1'b0;
+        adc_p_refl_pin           = 16'h0000;
+        adc_p_drive_pin          = 16'h0000;
+        module_fault_vector_pin  = 240'd0;
+
+        // Hold asynchronous master reset state
+        #100;
+        @(posedge clk_sys_pin);
+        rst_n_pin = 1'b1;
+        $display("[SYS_STATUS] Master Hardware Reset De-asserted.");
+        #50;
+
+        // =====================================================================
+        // TEST CASE 1: NORMAL PULSED RF OPERATION (BLF578 Baseline)
+        // Profile: 100µs pulse duration, 20% duty cycle, low VSWR match
+        // =====================================================================
+        $display("\n[TEST CASE 1] Commencing Normal Pulsed RF Operation Profile (100us, 20%% Duty)...");
+        
+        // Pulse 1: Normal Operation
+        @(posedge clk_fast_pin);
+        adc_p_drive_pin = 16'h7000; // Normal input drive (~44% full scale)
+        adc_p_refl_pin  = 16'h1200; // Perfect load matching (Very low return loss)
+        $display("[PULSE_GEN] RF Pulse Waveform Initiated.");
+        
+        #100000; // Hold pulse active for 100,000 ns (100 µs)
+        
+        @(posedge clk_fast_pin);
+        adc_p_drive_pin = 16'h0000; // Inter-pulse cooling window
+        adc_p_refl_pin  = 16'h0000;
+        $display("[PULSE_GEN] RF Pulse Intermission (Cooling Period).");
+        
+        #400000; // 400 µs off-time to satisfy 20% duty cycle profile
+        
+        // Verify safety actuators remained inactive
+        if (rf_gate_disable_pin === 1'b0 && psu_contactor_pin === 1'b0) begin
+            $display("[PASS] Test Case 1: Normal pulsed bounds maintained without false trips.");
+        end else begin
+            $display("[FAIL] Test Case 1: False interlock trigger occurred during baseline operation.");
+        end
+
+        // =====================================================================
+        // TEST CASE 2: CATASTROPHIC COAXIAL ARC EVENT (Fast Bypass Validation)
+        // Profile: Mid-pulse violent impedance shift (> THRES_FAST_150KW)
+        // =====================================================================
+        $display("\n[TEST CASE 2] Simulating Catastrophic Coaxial Output Line Arc...");
+        
+        @(posedge clk_fast_pin);
+        adc_p_drive_pin = 16'h7000; // Fire up a new RF pulse
+        adc_p_refl_pin  = 16'h1200; // Starts healthy
+        
+        #10000; // Wait 10 µs into the pulse
+        
+        @(posedge clk_fast_pin);
+        // Sudden violent reflection spike (Exceeds THRES_FAST_150KW = 16'hD000)
+        adc_p_refl_pin  = 16'hE200; 
+        $display("[FAULT_INJECT] Catastrophic Peak Reflected Power Spike Injected!");
+        
+        // CRITICAL CHECK: Measure combinatorial propagation delay instantly
+        #1; 
+        if (rf_gate_disable_pin === 1'b1) begin
+            $display("[PASS] Combinatorial Bypass verified! RF Blanking clamped within <1ns (Asynchronous).");
+        end else begin
+            $display("[FAIL] Combinatorial Bypass Failed! RF Gate did not disable immediately.");
+        end
+
+        // Monitor clock-domain synchronization delay inside central firmware matrix
+        @(posedge clk_sys_pin);
+        $display("[SYS_STATUS] Synced core processing clock domain caught fault flag.");
+        
+        // Remove the transient fault stimulus to ensure the interlock memory holds the trip
+        #500;
+        adc_p_refl_pin  = 16'h0000;
+        adc_p_drive_pin = 16'h0000;
+        #100;
+        
+        if (rf_gate_disable_pin === 1'b1) begin
+            $display("[PASS] Interlock verified as strictly latched despite transient clearance.");
+        end else begin
+            $display("[FAIL] Interlock failed to latch fault state.");
+        end
+
+        // Clear the latched state for the next test scenario
+        $display("[SYS_STATUS] Issuing manual system override reset stroke.");
+        interlock_reset_pin = 1'b1;
+        #100;
+        interlock_reset_pin = 1'b0;
+        #100;
+
+        // =====================================================================
+        // TEST CASE 3: THERMAL DEGRADATION / DRIFT (Slow Loop Validation)
+        // Profile: Sustained intermediate reflection exceeding 50kW threshold
+        // =====================================================================
+        $display("\n[TEST CASE 3] Simulating Slow Cavity Tuning Drift / Thermal Degradation...");
+        
+        @(posedge clk_fast_pin);
+        // Exceeds THRES_SLOW_50KW (16'h4500) but stays well below THRES_FAST_150KW (16'hD000)
+        adc_p_refl_pin = 16'h5200; 
+        $display("[FAULT_INJECT] Continuous intermediate mismatch applied.");
+
+        // Fast loop should ignore this transient immediately
+        #50;
+        if (rf_gate_disable_pin === 1'b0) begin
+            $display("[PASS] Fast comparator safely ignored localized low-energy transient.");
+        end
+
+        // Allow the fixed-point IIR filter pipeline loop to accumulate and decay the window
+        #25000; // Advance time to watch integration growth
+
+        if (rf_gate_disable_pin === 1'b1 && psu_contactor_pin === 1'b1) begin
+            $display("[PASS] Sustained average integrator tripped successfully.");
+            $display("[PASS] Core Brain dropped Main DC Rail Contactor to save LDMOS junctions.");
+        end else begin
+            $display("[FAIL] Slow accumulator loop failed to isolate long-term thermal fault.");
+        end
+
+        // Clear the structural latched loop
+        adc_p_refl_pin = 16'h0000;
+        #500;
+        interlock_reset_pin = 1'b1;
+        #100;
+        interlock_reset_pin = 1'b0;
+        #100;
+
+        // =====================================================================
+        // TEST CASE 4: LDMOS PALLET CASCADE FAILURE (Telemetry Matrix Validation)
+        // Profile: Single transistor structural unbalance reporting
+        // =====================================================================
+        $display("\n[TEST CASE 4] Simulating Pallet Transistor Gate/Drain Breakdown...");
+        
+        @(posedge clk_telemetry_pin);
+        // Assert a single structural health warning flag in the 240-channel combiner array
+        module_fault_vector_pin[87] = 1'b1; 
+        $display("[FAULT_INJECT] Telemetry breakdown asserted on Pallet Module Segment #87.");
+
+        // Wait for the slow telemetry monitoring clock domain edge to cycle through
+        @(posedge clk_telemetry_pin);
+        #50; // Allow CDC synchronizers to flag the central brain
+        @(posedge clk_sys_pin);
+        #50;
+
+        if (psu_contactor_pin === 1'b1) begin
+            $display("[PASS] Telemetry monitor isolated structural cascade failure and dropped DC rail.");
+        end else begin
+            $display("[FAIL] Telemetry monitor failed to process structural fault matrix.");
+        end
+
+        // --- Finalize Simulation ---
+        #1000;
+        $display("\n[TB END] 150kW Master SSA Interlock Suite Verification Complete.");
+        $finish;
+    end
+
+    // =========================================================================
+    // 5. DIAGNOSTIC WAVEFORM LOGGER
+    // =========================================================================
+    initial begin
+        $monitor("Time: %0t ns | Refl ADC: %h | Gate Disable Pad: %b | PSU Contactor Pad: %b", 
+                 $time, adc_p_refl_pin, rf_gate_disable_pin, psu_contactor_pin);
+    end
+
+endmodule
