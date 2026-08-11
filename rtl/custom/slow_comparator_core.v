@@ -9,7 +9,7 @@
 module slow_comparator_core (
     input  wire        clk_fast,
     input  wire        rst_n,
-    input  wire        interlock_reset_i,  // FIX #1: manual clear added
+    input  wire        interlock_reset_i,  // Manual clear 
     input  wire [15:0] p_refl_filtered,    // From iir_rc_filter — NOT raw ADC
     input  wire [15:0] thres_slow_50kw,
     output reg         trip_slow
