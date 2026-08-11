@@ -44,23 +44,23 @@ module interlock_aggregation_matrix (
             psu_armed         <= 1'b0;
         end
         else begin
-            // ── Gate disable: any trip source asserts immediately ──────────
+            //  Gate disable: any trip source asserts immediately 
             if (trip_fast_sync | trip_slow_sync |
                 trip_overdrive_sync | trip_unbalance_sync)
                 rf_gate_disable_o <= 1'b1;
 
-            // ── PSU arm flag: only on slow/telemetry trips ─────────────────
+            //  PSU arm flag: only on slow/telemetry trips
             // Fast and overdrive trips are transient; dropping the DC rail
             // for a µs-duration arc event is unnecessary and harmful.
             if (trip_slow_sync | trip_unbalance_sync)
                 psu_armed <= 1'b1;
 
-            // ── Hold-off counter: counts up once gate is disabled ──────────
+            //  Hold-off counter: counts up once gate is disabled 
             if (rf_gate_disable_o && psu_armed) begin
                 if (holdoff_counter < N_PSU_HOLDOFF[HOLDOFF_W-1:0])
                     holdoff_counter <= holdoff_counter + 1'b1;
                 else
-                    psu_contactor_o <= 1'b1;   // FIX #6: opens only after 50µs
+                    psu_contactor_o <= 1'b1;   //  opens only after 50µs
             end
         end
     end
