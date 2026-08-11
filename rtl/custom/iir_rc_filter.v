@@ -2,13 +2,13 @@
 module iir_rc_filter (
     input  wire        clk_fast,
     input  wire        rst_n,
-    input  wire        force_clear_i,     // FIX #5b: instant accumulator drain
+    input  wire        force_clear_i,     // instant accumulator drain
     input  wire [15:0] adc_p_refl,
     output wire [15:0] p_refl_filtered
 );
  
     // ALPHA_SHIFT = 13  →  tau ≈ 8192 clk_fast cycles ≈ 81.92 µs at 100 MHz
-    // Must satisfy: (16 - ALPHA_SHIFT) >= 0  →  ALPHA_SHIFT <= 16  ✓ (13 <= 16)
+    // (16 - ALPHA_SHIFT) >= 0  →  ALPHA_SHIFT <= 16  (13 <= 16)
     localparam integer ALPHA_SHIFT = 13;
  
     // Q16.16 accumulator: upper 16 bits = integer output
