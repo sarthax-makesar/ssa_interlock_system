@@ -2,9 +2,7 @@
 
 module ssa_top_tb;
  
-    // =========================================================================
     // 1. PARAMETERS
-    // =========================================================================
     // Clock periods
     localparam real T_FAST      = 10.0;   // 100 MHz
     localparam real T_SYS       = 20.0;   //  50 MHz
@@ -42,9 +40,9 @@ module ssa_top_tb;
     localparam [15:0] ADC_COND_REFL     = 16'h8500; // TC5: above slow, below fast
     localparam [15:0] ADC_OVERDRIVE     = 16'hC000; // TC7: above THRES_OVERDRIVE
  
-    // =========================================================================
+    
     // 2. SIGNAL DECLARATIONS
-    // =========================================================================
+    
     reg          clk_fast_pin;
     reg          clk_telemetry_pin;
     reg          clk_sys_pin;
@@ -64,9 +62,9 @@ module ssa_top_tb;
     integer      psu_trip_time;
     integer      delta_trip_time;
  
-    // =========================================================================
+    
     // 3. UUT INSTANTIATION
-    // =========================================================================
+    
     ssa_top uut (
         .clk_fast_pin            (clk_fast_pin),
         .clk_telemetry_pin       (clk_telemetry_pin),
@@ -79,10 +77,8 @@ module ssa_top_tb;
         .rf_gate_disable_pin     (rf_gate_disable_pin),
         .psu_contactor_pin       (psu_contactor_pin)
     );
- 
-    // =========================================================================
+    
     // 4. CLOCK GENERATORS
-    // =========================================================================
     initial clk_fast_pin      = 1'b0;
     always  #(T_FAST      / 2.0) clk_fast_pin      = ~clk_fast_pin;
  
@@ -92,9 +88,7 @@ module ssa_top_tb;
     initial clk_telemetry_pin = 1'b0;
     always  #(T_TELEMETRY / 2.0) clk_telemetry_pin = ~clk_telemetry_pin;
  
-    // =========================================================================
-    // 5. WAVEFORM DUMP  (FIX #5)
-    // =========================================================================
+    // 5. WAVEFORM DUMP  
     initial begin
         $dumpfile("ssa_top_tb.vcd");
         $dumpvars(0, ssa_top_tb);
@@ -123,11 +117,11 @@ module ssa_top_tb;
         end
     end
  
-    // =========================================================================
+    
     // 7. TASK: ISSUE INTERLOCK RESET  (FIX #4)
     //    Parameterised pulse, aligned to clk_sys, verifies clearance before
     //    returning. Halts simulation if reset silently fails.
-    // =========================================================================
+    
     task automatic issue_interlock_reset;
         integer k;
         begin
@@ -151,9 +145,9 @@ module ssa_top_tb;
         end
     endtask
  
-    // =========================================================================
+    
     // 8. MAIN STIMULUS
-    // =========================================================================
+
     integer cycle_count;
  
     initial begin
@@ -161,7 +155,7 @@ module ssa_top_tb;
         $display("[TB INFO ] THRES_FAST=0x%h  THRES_SLOW=0x%h  THRES_OD=0x%h",
                  THRES_FAST_150KW, THRES_SLOW_50KW, THRES_OVERDRIVE);
  
-        // --- Power-on initialisation ---
+        // Power-on initialisation 
         rst_n_pin               = 1'b0;
         interlock_reset_pin     = 1'b0;
         adc_p_refl_pin          = 16'h0000;
@@ -177,12 +171,11 @@ module ssa_top_tb;
         // Initial safety-latch clear
         issue_interlock_reset;
         $display("[SYS_STATUS] Power-on safety latch cleared.");
- 
-        // =====================================================================
+
         // TC1: NORMAL PULSED RF OPERATION
         // BLF578 spec: 100µs pulse, 20% duty cycle, low VSWR
         // Expect: no trip throughout
-        // =====================================================================
+     
         $display("\n[TC1] Normal pulsed RF — 100us pulse, 20%% duty, low VSWR");
  
         @(posedge clk_fast_pin);
@@ -203,12 +196,10 @@ module ssa_top_tb;
         else
             $display("[FAIL] TC1: False interlock trip during baseline operation!");
  
-        // =====================================================================
         // TC2: CATASTROPHIC COAXIAL ARC (Fast Bypass Path)
         // BLF578 spec: VSWR 13:1 survivability — beyond this is arc territory
         // Expect: rf_gate_disable asserts within 1 clk_fast cycle (~10ns)
         //         psu_contactor must NOT assert (fast arc = gate only, no PSU drop)
-        // =====================================================================
         $display("\n[TC2] Catastrophic coaxial arc — fast interlock path");
  
         @(posedge clk_fast_pin);
@@ -221,7 +212,7 @@ module ssa_top_tb;
         adc_p_refl_pin = ADC_ARC_REFL;       // 0xE200 — above THRES_FAST_150KW=0xD000
         $display("[TC2] Arc fault injected: refl=0x%h at t=%0t ns", adc_p_refl_pin, $time);
  
-        // FIX #1: Wait one full clk_fast cycle for registered comparator to latch,
+        // Wait one full clk_fast cycle for registered comparator to latch,
         //         then one more for the registered bypass OR output to update.
         // Total latency = 2 × T_FAST = 20ns (was checking #1 delta — raced itself)
         @(posedge clk_fast_pin); // fast_comparator_core latches trip_fast_raw
@@ -253,12 +244,11 @@ module ssa_top_tb;
  
         issue_interlock_reset;
  
-        // =====================================================================
+        
         // TC3: SUSTAINED THERMAL DRIFT (IIR Slow Path + PSU Hold-off)
         // ESRF spec: 50kW sustained reflection trips slow interlock
         // Expect: rf_gate after N_INTEG_CYCLES, psu after additional 50µs hold-off
         //         delta_trip_time must be >= 50µs (N_PSU_HOLDOFF × T_SYS)
-        // =====================================================================
         $display("\n[TC3] Sustained thermal drift — slow IIR path + PSU hold-off");
         $display("[TC3] Injecting refl=0x%h (above THRES_SLOW=0x%h). Waiting %0d clk_sys cycles (~180us, IIR tau=82us)...",
                  ADC_SLOW_REFL, THRES_SLOW_50KW, N_INTEG_CYCLES);
@@ -268,7 +258,7 @@ module ssa_top_tb;
         adc_p_drive_pin = ADC_NORMAL_DRIVE;
  
         // Wait for IIR integrator to saturate and slow_comparator to trip
-        // FIX #2: expressed as clk_sys cycle count, not magic #25000
+        // expressed as clk_sys cycle count, not magic #25000
         repeat (N_INTEG_CYCLES) @(posedge clk_sys_pin);
  
         if (rf_gate_disable_pin === 1'b1)
@@ -276,7 +266,7 @@ module ssa_top_tb;
         else
             $display("[FAIL] TC3: RF gate NOT asserted after %0d clk_sys cycles!", N_INTEG_CYCLES);
  
-        // FIX #2: PSU checked SEPARATELY after hold-off, not simultaneously
+        // PSU checked SEPARATELY after hold-off, not simultaneously
         // Now wait for the 50µs PSU contactor hold-off to expire
         $display("[TC3] Waiting %0d clk_sys cycles for PSU hold-off (~%0d µs)...",
                  N_PSU_HOLDOFF_TB, (N_PSU_HOLDOFF_TB * 20) / 1000);
@@ -296,13 +286,11 @@ module ssa_top_tb;
         adc_p_refl_pin  = 16'h0000;
         adc_p_drive_pin = 16'h0000;
         issue_interlock_reset;
- 
-        // =====================================================================
+
         // TC4: LDMOS PALLET CASCADE FAILURE (Telemetry Matrix)
         // TC4a: Single module fault → alarm only (no trip)
         // TC4b: 7 modules fault → trip (exceeds 6-module redundancy threshold)
-        // TC4c: Boundary modules [0] and [239] tested
-        // =====================================================================
+        // TC4c: Boundary modules [0] and
         $display("\n[TC4a] Single module fault — expect alarm only, no trip");
  
         @(posedge clk_telemetry_pin);
@@ -358,12 +346,11 @@ module ssa_top_tb;
         module_fault_vector_pin = 240'd0;
         issue_interlock_reset;
  
-        // =====================================================================
         // TC5: CAVITY CONDITIONING TRANSIENT
         // ESRF spec: 20µs pulse, reflected power spikes to ~2× incident during
         // cavity filling (6.1µs). Filtered interlock must NOT trip. Fast
         // interlock must NOT trip (0x8500 < THRES_FAST_150KW=0xD000).
-        // =====================================================================
+        
         $display("\n[TC5] Cavity conditioning transient — 20us pulse, sub-fast-threshold spike");
         $display("[TC5] refl=0x%h: above THRES_SLOW=0x%h, below THRES_FAST=0x%h (IIR tau=82us, pulse=20us => no trip)",
                  ADC_COND_REFL, THRES_SLOW_50KW, THRES_FAST_150KW);
@@ -391,14 +378,12 @@ module ssa_top_tb;
         adc_p_drive_pin = 16'h0000;
         // Drain IIR (force_clear fires on next reset)
         issue_interlock_reset;
- 
-        // =====================================================================
+
         // TC6: RF INPUT OVERDRIVE PROTECTION
         // BLF578 spec: must not exceed P1 compression point
         // THRES_OVERDRIVE = 0xB000; inject 0xC000 > 0xB000
         // Expect: rf_gate_disable from fast bypass (trip_overdrive_raw)
         //         psu_contactor must NOT assert (overdrive = gate only)
-        // =====================================================================
         $display("\n[TC6] RF input overdrive — forward drive exceeds P1 compression threshold");
  
         @(posedge clk_fast_pin);
@@ -424,8 +409,7 @@ module ssa_top_tb;
         adc_p_drive_pin = 16'h0000;
         adc_p_refl_pin  = 16'h0000;
         issue_interlock_reset;
- 
-        // =====================================================================
+
         // TC7: DRIVE CHAIN FAILURE (Pre-amplifier Watchdog Validation)
         // ESRF paper: "if one of the RF power modules used in the drive chain
         // fails, the output power can no longer be maintained..."
@@ -433,7 +417,7 @@ module ssa_top_tb;
         // Expect: The newly integrated lost_drive_watchdog must trip and drop
         //         rf_gate_disable_pin after exactly 500 us (50,000 fast cycles).
         //         The PSU contactor must stay online (gate-only protection).
-        // =====================================================================
+
         $display("\n[TC7] Drive chain failure — forward power loss with normal reflected");
  
         @(posedge clk_fast_pin);
@@ -447,7 +431,7 @@ module ssa_top_tb;
         adc_p_refl_pin  = ADC_NORMAL_REFL;
         $display("[TC7] Drive chain failure injected: drive=0x0000 at t=%0t ns", $time);
  
-        // Step 7a: Verify watchdog does NOT trip prematurely before the timeout
+        //  Verify watchdog does NOT trip prematurely before the timeout
         #490_000; // Wait 490 us (just under the 500 us threshold window)
         #1;
         if (rf_gate_disable_pin === 1'b0)
@@ -455,7 +439,7 @@ module ssa_top_tb;
         else
             $display("[FAIL] TC7: Watchdog tripped too early before its 500 us delay window!");
             
-        // Step 7b: Cross the 500 us boundary line and verify immediate blanking 
+        //  Cross the 500 us boundary line and verify immediate blanking 
         $display("[TC7] Advancing past 500 us boundary to allow watchdog to mature...");
         #15_000; // Crosses 500 us mark (cumulative 505 us of total loss)
         #1;      // Settle combinatorial registers
@@ -465,7 +449,7 @@ module ssa_top_tb;
         else
             $display("[FAIL] TC7: Watchdog FAILED to latch rf_gate_disable_pin high after timeout!");
  
-        // Step 7c: Verify the PSU safety relay remains closed 
+        //  Verify the PSU safety relay remains closed 
         if (psu_contactor_pin === 1'b0)
             $display("[PASS] TC7: PSU contactor remained safely online (gate-only protective trip).");
         else
@@ -475,9 +459,8 @@ module ssa_top_tb;
         adc_p_refl_pin  = 16'h0000;
         issue_interlock_reset;
  
-        // =====================================================================
+        
         // END
-        // =====================================================================
         #1000;
         $display("\n[TB END] 150kW SSA Interlock Suite — All test cases complete.");
         $finish;
