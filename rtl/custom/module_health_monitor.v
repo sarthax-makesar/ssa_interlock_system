@@ -8,7 +8,7 @@
 module module_health_monitor (
     input  wire         clk_telemetry,
     input  wire         rst_n,
-    input  wire         interlock_reset_i,   // FIX #2: manual clear added
+    input  wire         interlock_reset_i,   //  manual clear added
     input  wire [239:0] module_fault_vector,
     output reg          fault_alarm_o,       // Soft alarm: ≥1 module faulted
     output reg          trip_unbalance       // Hard trip: ≥ MAX_FAULT_MODULES
@@ -18,9 +18,9 @@ module module_health_monitor (
     localparam integer MAX_FAULT_MODULES = 6;
 
     // Population count: sum all 240 fault bits
-    // Verilog reduction: computed combinatorially before registering
+    // computed combinatorially before registering
     integer i;
-    reg [7:0] fault_count;   // 8 bits: max value 240, fits in 8 bits
+    reg [7:0] fault_count;   // 8 bits: max value 240
 
     always @(*) begin
         fault_count = 8'd0;
@@ -32,7 +32,7 @@ module module_health_monitor (
         if (!rst_n) begin
             fault_alarm_o  <= 1'b0;
             trip_unbalance <= 1'b0;
-        end else if (interlock_reset_i) begin    // FIX #2
+        end else if (interlock_reset_i) begin    // This 
             fault_alarm_o  <= 1'b0;
             trip_unbalance <= 1'b0;
         end else begin
