@@ -7,7 +7,7 @@
 module overdrive_protect_unit (
     input  wire        clk_fast,
     input  wire        rst_n,
-    input  wire        interlock_reset_i,  // FIX #1: manual clear added
+    input  wire        interlock_reset_i,  //  manual clear added
     input  wire [15:0] adc_p_drive,
     input  wire [15:0] thres_overdrive,
     output reg         trip_overdrive
