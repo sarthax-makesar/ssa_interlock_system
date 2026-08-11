@@ -18,7 +18,7 @@ module ssa_top (
     output wire         psu_contactor_pin    // Relay to drop main DC rail
 );
 
-    // ── Threshold constants ────────────────────────────────────────────────────
+    //  Threshold constants 
     // THRES_FAST_150KW = 0xD000: ~81% ADC full scale → ~150kW reflected
     // THRES_SLOW_50KW  = 0x4500: ~27% ADC full scale → ~50kW sustained average
     // THRES_OVERDRIVE  = 0xB000: ~69% ADC full scale → below BLF578 P1 point
@@ -29,23 +29,23 @@ module ssa_top (
 	 localparam [15:0] THRES_DRIVE_MIN  = 16'h0B33;
     localparam [31:0] G_WDT_MAX        = 32'd50000;
 
-    // ── Internal wires (clk_fast domain, pre-CDC) ─────────────────────────────
+    // Internal wires (clk_fast domain, pre-CDC) 
     wire        trip_fast_raw;
     wire        trip_slow_raw;
     wire        trip_overdrive_raw;
     wire        trip_unbalance_raw;
     wire [15:0] p_refl_filtered_wire;
 	 wire        lost_drive_trip_raw;
-    // ── Synchronized wires (clk_sys domain, post-CDC) ─────────────────────────
+    //  Synchronized wires (clk_sys domain, post-CDC) 
     wire        trip_fast_sync;
     wire        trip_slow_sync;
     wire        trip_overdrive_sync;
     wire        trip_unbalance_sync;
 
-    // ── Intermediate wire from central brain ───────────────────────────────────
+    //  Intermediate wire from central brain 
     wire        rf_gate_disable_brain;
 
-    // ── FIX #4: registered fast-bypass output ─────────────────────────────────
+    // Registered fast-bypass output 
     // Replaces combinatorial assign to prevent power-up glitch on LVDS clamp.
     // Adds exactly 1 clk_fast cycle (10ns) to fast path — acceptable given
     // BLF578 circulator load absorbs transients for >> 1 RF cycle.
@@ -62,15 +62,13 @@ module ssa_top (
 
     assign rf_gate_disable_pin = rf_gate_disable_reg;
 
-    /* =========================================================================
-       1. CORE ENGINES  (100 MHz clk_fast domain)
-       ========================================================================= */
+    //  CORE ENGINES  (100 MHz clk_fast domain)
 
     // Instantaneous reflected power monitor
     fast_comparator_core u_fast_comp (
         .clk_fast          (clk_fast_pin),
         .rst_n             (rst_n_pin),
-        .interlock_reset_i (interlock_reset_pin),  // FIX #1
+        .interlock_reset_i (interlock_reset_pin),  
         .adc_p_refl        (adc_p_refl_pin),
         .thres_fast_150kw  (THRES_FAST_150KW),
         .trip_fast         (trip_fast_raw)
@@ -80,7 +78,7 @@ module ssa_top (
     iir_rc_filter u_filter (
         .clk_fast          (clk_fast_pin),
         .rst_n             (rst_n_pin),
-        .force_clear_i     (interlock_reset_pin),  // FIX #5
+        .force_clear_i     (interlock_reset_pin),  
         .adc_p_refl        (adc_p_refl_pin),
         .p_refl_filtered   (p_refl_filtered_wire)
     );
@@ -89,7 +87,7 @@ module ssa_top (
     slow_comparator_core u_slow_comp (
         .clk_fast          (clk_fast_pin),
         .rst_n             (rst_n_pin),
-        .interlock_reset_i (interlock_reset_pin),  // FIX #1
+        .interlock_reset_i (interlock_reset_pin),  
         .p_refl_filtered   (p_refl_filtered_wire),
         .thres_slow_50kw   (THRES_SLOW_50KW),
         .trip_slow         (trip_slow_raw)
@@ -99,7 +97,7 @@ module ssa_top (
     overdrive_protect_unit u_overdrive_comp (
         .clk_fast          (clk_fast_pin),
         .rst_n             (rst_n_pin),
-        .interlock_reset_i (interlock_reset_pin),  // FIX #1
+        .interlock_reset_i (interlock_reset_pin),  
         .adc_p_drive       (adc_p_drive_pin),
         .thres_overdrive   (THRES_OVERDRIVE),
         .trip_overdrive    (trip_overdrive_raw)
@@ -108,19 +106,16 @@ module ssa_top (
 	 lost_drive_watchdog u_lost_drive_watchdog (
         .clk_fast          (clk_fast_pin),          // 100 MHz domain mapping
         .rst_n             (rst_n_pin),
-        .interlock_reset_i (interlock_reset_pin),   // Rule 4
-        .adc_p_drive_pin   (adc_p_drive_pin),       // Rule 1
-        // Rule 2: Inhibit if an alternative active trip has already claimed the gate
+        .interlock_reset_i (interlock_reset_pin),   
+        .adc_p_drive_pin   (adc_p_drive_pin),       
+        //  Inhibit if an alternative active trip has already claimed the gate
         .rf_gate_disable_i (trip_fast_raw | trip_overdrive_raw | rf_gate_disable_brain), 
         .lost_drive_trip_o (lost_drive_trip_raw)   // Rule 3 (Latched Output)
     );
 
-    /* =========================================================================
-       2. TELEMETRY ENGINE  (10 MHz clk_telemetry domain)
-       ========================================================================= */
+    // 2. TELEMETRY ENGINE  (10 MHz clk_telemetry domain)
 
     // 240-channel LDMOS pallet structural health matrix
-    // Note: fault_alarm_o left unconnected at top level — available for
     // external alarm bus or status register connection in future revision.
     module_health_monitor u_health_mon (
         .clk_telemetry      (clk_telemetry_pin),
@@ -131,12 +126,11 @@ module ssa_top (
         .trip_unbalance     (trip_unbalance_raw)
     );
 
-    /* =========================================================================
-       3. CROSS-CLOCK DOMAIN SYNCHRONIZATION  (→ 50 MHz clk_sys domain)
-          FIX #3: gc_sync_ffs.v Verilog behavioral wrapper replaces missing
-          OHWR VHDL entity. Port signature matches VHDL original exactly.
-          npulse_o and ppulse_o left open (unused at this level).
-       ========================================================================= */
+    // CROSS-CLOCK DOMAIN SYNCHRONIZATION  (→ 50 MHz clk_sys domain)
+    // gc_sync_ffs.v Verilog behavioral wrapper replaces missing
+    //OHWR VHDL entity. Port signature matches VHDL original exactly.
+    // npulse_o and ppulse_o left open (unused at this level).
+     
 
     gc_sync_ffs u_sync_fast (
         .clk_i    (clk_sys_pin),
@@ -174,10 +168,8 @@ module ssa_top (
         .ppulse_o ()
     );
 
-    /* =========================================================================
-       4. CENTRALIZED INTERLOCK MATRIX  (50 MHz clk_sys domain)
-          FIX #6: PSU contactor hold-off (50µs) implemented inside this module.
-       ========================================================================= */
+    /// CENTRALIZED INTERLOCK MATRIX  (50 MHz clk_sys domain)
+          
 
     interlock_aggregation_matrix u_central_brain (
         .clk_sys             (clk_sys_pin),
